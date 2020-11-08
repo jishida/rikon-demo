@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>離婚協議書作成デモ(簡易版)</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="pdfmake.min.js"></script>
+  <script src="vfs_fonts.js"></script>
+</head>
+<body>
+  <div id="content">
+    <div id="header">
+      <h1>離婚協議書作成デモ(簡易版)</h1>
+    </div>
+    <form>
+      <fieldset>
+        <legend>夫</legend>
+        <p>
+          <label>名前
+            <input type="text" id="hasband_name" value="山田太郎">
+          </label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>妻</legend>
+        <p>
+          <label>名前
+            <input type="text" id="wife_name" value="山田花子">
+          </label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>子1</legend>
+        <p>
+          <label>名前
+            <input type="text" id="child1_name" value="一郎">
+          </label>
+        </p>
+        <p>
+          <label>続柄
+            <input type="text" id="child1_relation" value="長男">
+          </label>
+        </p>
+        <p>
+          <label>生年月日
+            <input type="date" id="child1_birthday" value="2010-01-01">
+          </label>
+        </p>
+        <p>
+          <label>養育費
+            <input type="integer" id="child1_support_amount" value="20000">
+          </label>
+        </p>
+        <p>
+          <label>養育費期限
+            <input type="month" id="child1_support_end_month" value="2031-03">
+          </label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>子2</legend>
+        <p>
+          <label>名前
+            <input type="text" id="child2_name" value="二郎">
+          </label>
+        </p>
+        <p>
+          <label>続柄
+            <input type="text" id="child2_relation" value="次男">
+          </label>
+        </p>
+        <p>
+          <label>生年月日
+            <input type="date" id="child2_birthday" value="2012-02-02">
+          </label>
+        </p>
+        <p>
+          <label>養育費
+            <input type="integer" id="child2_support_amount" value="20000">
+          </label>
+        </p>
+        <p>
+          <label>養育費期限
+            <input type="month" id="child2_support_end_month">
+          </label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>子3</legend>
+        <p>
+          <label>名前
+            <input type="text" id="child3_name" value="三子">
+          </label>
+        </p>
+        <p>
+          <label>続柄
+            <input type="text" id="child3_relation" value="長女">
+          </label>
+        </p>
+        <p>
+          <label>生年月日
+            <input type="date" id="child3_birthday" value="2014-04-04">
+          </label>
+        </p>
+        <p>
+          <label>養育費
+            <input type="integer" id="child3_support_amount" value="20000">
+          </label>
+        </p>
+        <p>
+          <label>養育費期限
+            <input type="month" id="child3_support_end_month">
+          </label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>子4</legend>
+        <p>
+          <label>名前
+            <input type="text" id="child4_name">
+          </label>
+        </p>
+        <p>
+          <label>続柄
+            <input type="text" id="child4_relation">
+          </label>
+        </p>
+        <p>
+          <label>生年月日
+            <input type="date" id="child4_birthday">
+          </label>
+        </p>
+        <p>
+          <label>養育費
+            <input type="integer" id="child4_support_amount">
+          </label>
+        </p>
+        <p>
+          <label>養育費期限
+            <input type="month" id="child4_support_end_month">
+          </label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>子5</legend>
+        <p>
+          <label>名前
+            <input type="text" id="child5_name">
+          </label>
+        </p>
+        <p>
+          <label>続柄
+            <input type="text" id="child5_relation">
+          </label>
+        </p>
+        <p>
+          <label>生年月日
+            <input type="date" id="child5_birthday">
+          </label>
+        </p>
+        <p>
+          <label>養育費
+            <input type="integer" id="child5_support_amount">
+          </label>
+        </p>
+        <p>
+          <label>養育費期限
+            <input type="month" id="child5_support_end_month">
+          </label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>子6</legend>
+        <p>
+          <label>名前
+            <input type="text" id="child6_name">
+          </label>
+        </p>
+        <p>
+          <label>続柄
+            <input type="text" id="child6_relation">
+          </label>
+        </p>
+        <p>
+          <label>生年月日
+            <input type="date" id="child6_birthday">
+          </label>
+        </p>
+        <p>
+          <label>養育費
+            <input type="integer" id="child6_support_amount">
+          </label>
+        </p>
+        <p>
+          <label>養育費期限
+            <input type="month" id="child6_support_end_month">
+          </label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>子7</legend>
+        <p>
+          <label>名前
+            <input type="text" id="child7_name">
+          </label>
+        </p>
+        <p>
+          <label>続柄
+            <input type="text" id="child7_relation">
+          </label>
+        </p>
+        <p>
+          <label>生年月日
+            <input type="date" id="child7_birthday">
+          </label>
+        </p>
+        <p>
+          <label>養育費
+            <input type="integer" id="child7_support_amount">
+          </label>
+        </p>
+        <p>
+          <label>養育費期限
+            <input type="month" id="child7_support_end_month">
+          </label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>子8</legend>
+        <p>
+          <label>名前
+            <input type="text" id="child8_name">
+          </label>
+        </p>
+        <p>
+          <label>続柄
+            <input type="text" id="child8_relation">
+          </label>
+        </p>
+        <p>
+          <label>生年月日
+            <input type="date" id="child8_birthday">
+          </label>
+        </p>
+        <p>
+          <label>養育費
+            <input type="integer" id="child8_support_amount">
+          </label>
+        </p>
+        <p>
+          <label>養育費期限
+            <input type="month" id="child8_support_end_month">
+          </label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>親権及び監護権</legend>
+        <p>
+          <label>親権者
+            <select id="parental_authority">
+              <option value="hasband">夫</option>
+              <option value="wife" selected>妻</option>
+            </select>
+          </label>
+        </p>
+        <p>
+          <label>監護権者
+            <select id="support_creditor">
+              <option value="hasband">夫</option>
+              <option value="wife" selected>妻</option>
+            </select>
+          </label>
+        </p>
+        <p>
+          <label>養育費支払い開始月
+            <input type="month" id="support_start_month">
+          </label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>慰謝料</legend>
+        <p>
+          <label>慰謝料債務者
+            <select id="solatium_debtor">
+              <option value=""></option>
+              <option value="hasband" selected>夫</option>
+              <option value="wife">妻</option>
+            </select>
+          </label>
+        </p>
+        <p>
+          <label>慰謝料
+            <input type="integer" id="solatium_amount" value="100000">
+          </label>
+        </p>
+        <p>
+          <label>慰謝料支払回数
+            <input type="integer" id="solatium_count" value="12">
+          </label>
+        </p>
+        <p>
+          <label>慰謝料支払い開始月
+            <input type="month" id="solatium_start_month">
+          </label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>財産分与</legend>
+        <p>
+          <label>財産分与債務者
+            <select id="division_debtor">
+              <option value=""></option>
+              <option value="hasband" selected>夫</option>
+              <option value="wife">妻</option>
+            </select>
+          </label>
+        </p>
+        <p>
+          <label>財産分与金額
+            <input type="integer" id="division_amount" value="2000000">
+          </label>
+        </p>
+        <p>
+          <label>財産分与支払い期日
+            <input type="date" id="division_payment_date">
+          </label>
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend>その他</legend>
+        <p>
+          <label>作成日
+            <input type="date" id="creation_date">
+          </label>
+        </p>
+        <p>
+          <label>離婚届提出者
+            <select id="submitter">
+              <option value="hasband">夫</option>
+              <option value="wife" selected>妻</option>
+            </select>
+          </label>
+        </p>
+        <p>
+          <label>離婚届提出日
+            <input type="date" id="submission_date">
+          </label>
+        </p>
+        <p>
+          <label>離婚届提出先
+            <input type="text" id="submission_destination" value="静岡市葵区役所">
+          </label>
+        </p>
+        <p>
+          <label>公正証書
+            <input type="checkbox" checked id="notarized_doc">
+          </label>
+        </p>
+        <p>
+          <label>面接制限
+            <textarea id="meeting_limit" wrap="soft" rows="4">月に1回、2時間以内</textarea>
+          </label>
+        </p>
+        <p>
+          <label>面接交渉条件
+            <textarea id="negotiation_limit" wrap="soft" rows="4">3ヶ月に一回、宿泊を伴う</textarea>
+          </label>
+        </p>
+      </fieldset>
+      <div class="button_area">
+        <input type="button" value="PDF作成" onclick="createDoc()">
+      </div>
+    </form>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>

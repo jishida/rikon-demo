@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "target":"es5",
+    "module":"es2015",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": ["types"],
+    "lib": [
+      "es2020",
+      "dom"
+    ]
+  }
+}
