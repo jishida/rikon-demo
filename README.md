@@ -2,7 +2,7 @@
 
 ## 概要
 
-[こちら](https://jishida.github.io/rikon-demo/index.md) を読んでください。
+[こちら](https://jishida.github.io/rikon-demo/) を読んでください。
 
 ## デモ
 
