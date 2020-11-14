@@ -80,8 +80,16 @@ export default class Model extends ControlContainer {
 
   readonly abbr = (couple: Couple) => this[couple].abbrev;
 
-  readonly printWithLiteral = () => {
-    printers.printWithLiteral(this);
+  readonly printWithLiteral = async () => {
+    this.enabled = false;
+    try {
+      await new Promise((resolve) => {
+        printers.printWithLiteral(this);
+        resolve();
+      });
+    } finally {
+      this.enabled = true;
+    }
   };
 
   handleChildrenChange() {
