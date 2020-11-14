@@ -18,7 +18,7 @@
 
 作ってるうちに仕様が変わることはまあよくあることですが、ある程度まとめておくと仕様変更があっても煩雑になりにくいです。
 
-私が今回のデモを作るにあたって大まかな仕様をまとめたものが[こちら](https://jishida.github.com/rikon-demo/specification.md)になります。
+私が今回のデモを作るにあたって大まかな仕様をまとめたものが[こちら](https://jishida.github.com/rikon-demo/specification)になります。
 
 仕様策定の導入として、プログラミングは変数名をアルファベットで書くことが一般的なので使用する固有名詞に対応した英語なんかを調べておくと変数名で悩みにくいです。英語よりローマ字読みのほうがわかりやすいならローマ字でも構いません。例を挙げると"債務者"を"debtor"とするか"saimusha"にするかということです。人に見せるものでないなら好きな方でいいと思います。
 
@@ -30,9 +30,9 @@ javascriptはブラウザ内での動作を前提とした独特のAPIを持っ�
 
 今回、javascriptとtypescriptで２種類の実装をしました。
 
-javascript版のデモは[こちら]() ソースコードは[こちら](https://github.com/jishida/rikon-demo/tree/master/javascript-minimal-web)
+javascript版のデモは[こちら](https://jishida.github.io/rikon-demo/javascript-minimal-web/index.html) ソースコードは[こちら](https://github.com/jishida/rikon-demo/tree/master/javascript-minimal-web)
 
-typescript版のデモは[こちら]() ソースコードは[こちら](https://github.com/jishida/rikon-demo/tree/master/typescript-react-web)
+typescript版のデモは[こちら](https://jishida.github.io/rikon-demo/typescript-react-web/index.html) ソースコードは[こちら](https://github.com/jishida/rikon-demo/tree/master/typescript-react-web)
 
 ソースコードは[github](https://github.com/jishida/rikon-demo)上で見ることができます。
 vscodeで見たり書き換えたりブラウザで実際に動作を確認したりする場合は[こちら](https://github.com/jishida/rikon-demo/archive/master.zip)からソースコードをダウンロードしてください。
@@ -88,3 +88,5 @@ nodejsを使った開発ではnpmコマンドを使って開発に必要なツ�
 - @material-ui: googleが推奨するマテリアルデザインをReactで使える使えるようにするコンポーネント群。
 - date-fns: 日付処理ライブラリ。
 - @types: typescriptの型定義が見つからないjavascriptライブラリの型定義を補完する。
+
+眠たい...目が冷めたら整理するかも。
