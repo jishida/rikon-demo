@@ -9,10 +9,16 @@ import { IconButton, DatePicker, Switch, ValidatableTextField } from './parts';
 import { Context, Child as ChildModel } from '../models';
 
 const Child = ({ model: child }: { model: ChildModel }) => {
+  child.use();
+  const alertColor = child.alertMessage.value ? 'error' : 'inherit';
   return (
     <Box className='childFieldset' component='fieldset'>
-      <Box component='legend'>
-        <Typography variant='h6'>{`子供${child.index + 1}`}</Typography>
+      <Box component='legend' borderColor={alertColor}>
+        <Typography variant='h6' color={alertColor}>
+          {`子供${child.index + 1}${
+            child.alertMessage.value ? ` - ${child.alertMessage.value}` : ''
+          }`}
+        </Typography>
       </Box>
       <Box>
         <Box my={2} mx={1}>

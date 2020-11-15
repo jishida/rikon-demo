@@ -33,6 +33,10 @@ export default class Child extends ControlContainer {
     this.supportEndMonth.enabled = false;
   }
 
+  use() {
+    this.alertMessage.use();
+  }
+
   get index() {
     return this._index;
   }
@@ -54,7 +58,7 @@ export default class Child extends ControlContainer {
 
   protected validateImpl() {
     const ok = super.validateImpl();
-    if (ok && (this.supportAmount.result || 0) > 0) {
+    if (!this.supportAmount.hasError && (this.supportAmount.result || 0) > 0) {
       const start = this._model.parentalAuthority.supportStartMonth.value;
       const end = this.supportEndMonth.enabled
         ? this.supportEndMonth.value
@@ -69,6 +73,7 @@ export default class Child extends ControlContainer {
     } else {
       this._supportCount = 0;
     }
+    this.alertMessage.value = '';
     return ok;
   }
 }
