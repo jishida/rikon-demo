@@ -6,8 +6,7 @@
   "scripts": {
     "build": "webpack -c webpack.config.prod.js",
     "dev": "webpack --devtool inline-source-map -c webpack.config.js",
-    "predev": "node scripts/prebuild.js",
-    "prefast": "node scripts/prebuild.js",
+    "predev": "node scripts/predev.js",
     "format": "prettier * --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
