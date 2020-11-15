@@ -1,12 +1,7 @@
 import React, { useContext } from 'react';
-import { Box, InputLabel, Tooltip, Typography } from '@material-ui/core';
+import { Box, Tooltip, Typography } from '@material-ui/core';
 
-import {
-  CoupleSelect,
-  DatePicker,
-  Switch,
-  ValidatableTextField,
-} from './parts';
+import { Switch, ValidatableTextField } from './parts';
 import { Context } from '../models';
 
 export default () => {
@@ -47,7 +42,8 @@ export default () => {
                 label='面接制限'
                 control={meeting.meetingLimit}
                 variant='outlined'
-                type='textarea'
+                multiline
+                rows={4}
                 fullWidth
               />
             </Tooltip>
@@ -62,7 +58,8 @@ export default () => {
                 label='面接交渉条件'
                 control={meeting.negotiationLimit}
                 variant='outlined'
-                type='textarea'
+                multiline
+                rows={4}
                 fullWidth
               />
             </Tooltip>
