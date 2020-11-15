@@ -6,7 +6,6 @@
     "jsx": "react",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "typeRoots": ["types"],
     "lib": [
       "es2020",
       "dom"
