@@ -40,15 +40,21 @@ vscodeで見たり書き換えたりブラウザで実際に動作を確認し�
 ## 4. javascript版
 
 javascriptでの実装はHTML+javascriptで作る最小構成のウェブアプリケーションとなっており、使用している外部ライブラリはPDFを作成する [pdfmake](http://pdfmake.org/#/) のみとなっています。
+すでに更新が止まっていて新しい機能が使えないInternet Explorerでも動作する基本的ですがかなり古い書き方です。
 
-すでに更新が止まっていて新しい機能が使えないInternet Explorerでも動作する。基本的ですがかなり古い書き方です。
+HTMLとjavascriptを知るには [MDN](https://developer.mozilla.org/ja/) が内容が充実していてかつ日本語にも訳されているためおすすめです。
+
+基本的に以下の3つの技術を組み合わせてウェブページは作成されます。リンク先に詳しい解説があるのでそちらを読めば学習できると思います。
+- [HTML](https://developer.mozilla.org/ja/docs/Web/HTML): `<div>`のようなマークアップを用いてウェブページのコンテンツを記述します。
+- [javascript](https://developer.mozilla.org/ja/docs/Web/JavaScript): ウェブページ上で実行することができるプログラミング言語です。
+- [CSS](https://developer.mozilla.org/ja/docs/Web/CSS): HTMLに記述されたコンテンツをどのように表示するかを定義します。見た目の問題なので後回しでいいです。
 
 #### 構成ファイルの説明
 
 javascript版のデモを構成するデータはソースコードの [javascript-minimal-web](https://github.com/jishida/rikon-demo/tree/master/javascript-minimal-web) フォルダにあります。
 画面に表示する入力フォームなどは [index.html](https://github.com/jishida/rikon-demo/blob/master/javascript-minimal-web/index.html) に、動作を制御するjavascriptは [index.js](https://github.com/jishida/rikon-demo/blob/master/javascript-minimal-web/index.js) にそれぞれ一つのファイルに収められています。
 
-style.cssはhtmlの各要素のレイアウトや見え方を変更できるスタイルシートです。これを書き換えるだけで見た目をがらりと変えることもできますが、私は詳しくないので適当です。
+style.cssはhtmlの各要素のレイアウトや見え方を変更できるスタイルシートです。HTMLの各要素をクラス分けしてCSSを書き換えると見た目をがらりと変えることもできますが、私は詳しくないので適当です。
 
 pdfmake.min.js と vfs_fonts.js はpdfmakeを日本語に対応させたpdfmakeの改造版になります。
 pdfmakeは基本的な使い方であれば日本語の解説記事も見つかりますが、細かく調整したいなら英語ですが[公式のドキュメント](https://pdfmake.github.io/docs/0.1/)に詳しい使い方が書かれています。
