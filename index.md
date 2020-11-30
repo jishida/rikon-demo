@@ -4,27 +4,29 @@
 
 このアプリケーションはあくまでデモです。
 
-こういったWEBサイトを作る際、データ通信を少なくするため必要なファイルサイズを小さくするものですが、このデモのファイルサイズ合計は10MB近く一般的なウェブサイトよりもかなり大きめになっています。
+こういったWEBサイトを作る際、データ通信を少なくするため必要なファイルサイズを小さくするものですが、このデモのファイルサイズ合計は10MB近くあり一般的なウェブサイトよりもかなり大きめになっています。
 
-その理由はウェブブラウザだけでPDFを作成するために利用しているpdfmakeというライブラリで日本語を印刷するためには日本語フォントをスクリプトに埋め込む必要があるからです。
+その理由はウェブブラウザだけでPDFファイルを作成するために必要なpdfmakeというライブラリを用いて日本語を含むPDFファイルを作成する際、pdfmakeを改変して日本語フォントをスクリプトに埋め込む必要があるからです。
 
-多数の漢字を含む日本語フォントは英数字100文字程度の英文フォントに比べて圧倒的にデータサイズが大きく、デフォルトの英文フォントが170KBほどであるのに対し、今回使用した"GenShinGothic-Monospace-Medium"は4839KBもあります。
+多数の漢字を含む日本語フォントは英数字100文字程度の英文フォントに比べて圧倒的にデータサイズが大きく、デフォルトの英文フォントが170KBほどであるのに対し、今回使用した"GenShinGothic-Monospace-Medium"は4839KBもあります。さらにスクリプトに埋め込むためにフォントデータを符号化する必要がありそれによりデータサイズが33%ほど大きくなります。
 
-ですから一般的にはウェブブラウザでPDF作成をするという処理はせず、数十～数百バイトの必要なパラメーターだけサーバーに送り、サーバーで数十KBほどのPDFを作成してウェブブラウザに送り返すという処理をします。
+ですから一般的にはウェブブラウザでPDFを作成をするという処理はせず、数十～数百Bの必要なパラメーターだけサーバーに送り、サーバーで数十KBほどのPDFを作成してウェブブラウザに送り返すという処理をします。
 
 しかし、今回のデモの目的がプログラミング初心者が触れるものということだったため、サーバー側で処理をさせる実装はサーバーサイドの環境構築やアプリケーションの実装など理解に要する範囲が増大すると判断し、一般的に使われることの少ないクライアントサイドで完結する実装を優先しました。
 
 ## 2. 仕様の検討
 
-作ってるうちに仕様が変わることはまあよくあることですが、ある程度まとめておくと仕様変更があっても煩雑になりにくいです。
+作ってるうちに仕様が変わることはままあることですが、ある程度仕様を見やすい形でまとめておくと仕様変更があっても煩雑になりにくいです。
 
 私が今回のデモを作るにあたって大まかな仕様をまとめたものが[こちら](https://jishida.github.com/rikon-demo/specification)になります。
 
-仕様策定の導入として、プログラミングは変数名をアルファベットで書くことが一般的なので使用する固有名詞に対応した英語なんかを調べておくと変数名で悩みにくいです。英語よりローマ字読みのほうがわかりやすいならローマ字でも構いません。例を挙げると"債務者"を"debtor"とするか"saimusha"にするかということです。人に見せるものでないなら好きな方でいいと思います。
+仕様策定の第一歩として、使用する固有名詞に対応した英語を調べておくと変数名を決定する際に悩みにくいです。大多数のプログラミング言語は変数名をアルファベットで書くことが一般的であるためです。英語よりローマ字読みのほうがわかりやすいならローマ字でも構いません。例を挙げると"債務者"を"debtor"とするか"saimusha"にするかということです。人に見せるものでないなら好きな方でいいと思います。
 
-あと大事なのはデータ型を意識することです。javascriptを使うにあたってstring(文字列型)、number(数値型)、boolean(真偽値型)、Array(配列型)、Object(オブジェクト型)といった基本的なデータ型は押さえておきたいです。
+次に大事なことはデータ型を意識することです。javascriptを使うにあたってstring(文字列型)、number(数値型)、boolean(真偽値型)、Array(配列型)、Object(オブジェクト型)といった基本的なデータ型は押さえておきたいです。
 
-javascriptはブラウザ内での動作を前提とした独特のAPIを持っており、非同期処理などわかりにくい部分も多いですが、[MDN](https://developer.mozilla.org/ja/)の[リファレンス](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference)を見ると日本語で仕様を確認できるので比較的日本人にも優しいかもしれません。
+javascriptはブラウザ内での動作を前提とした独特のAPIを持っており、コールバックによる非同期処理やプロトタイプなどわかりにくい仕様の多い言語です。
+しかしながら、WEBサイトを作る際に必要な言語であるため利用者層が厚く玉石混淆ではありますが日本語の書籍や記事がありふれているので比較的日本人にとっては始めやすい言語なのかもしれません。
+特に[MDN](https://developer.mozilla.org/ja/)には日本語の[チュートリアル](https://developer.mozilla.org/ja/docs/Learn/JavaScript/First_steps)や[リファレンス](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference)が揃っているためわからないことはひとまずこちらで確認して、それでもわからない場合はWeb検索を使うといったやり方がおすすめです。最近はWeb検索で上位に表示されるように工夫された低品質なサイトが検索上位に並ぶこともよくあるのでそういったサイトを覚えておけば無駄な記事を読む時間を節約することができるかもしれません。
 
 ## 3. 二種類の実装
 
@@ -39,8 +41,9 @@ vscodeで見たり書き換えたりブラウザで実際に動作を確認し�
 
 ## 4. javascript版
 
-javascriptでの実装はHTML+javascriptで作る最小構成のウェブアプリケーションとなっており、使用している外部ライブラリはPDFを作成する [pdfmake](http://pdfmake.org/#/) のみとなっています。
-すでに更新が止まっていて新しい機能が使えないInternet Explorerでも動作する基本的ですがかなり古い書き方です。
+javascript版の実装はHTML+javascriptで作る最小構成のウェブアプリケーションとなっており、使用している外部ライブラリはPDFを作成する [pdfmake](http://pdfmake.org/#/) のみとなっています。
+一応Internet Explorer(以下、IE)でも動作する基本的ですがかなり古い書き方をしています。
+IEは開発元のMicrosoftが開発を停止したためjavascriptの新しい機能が使えず最近ではIE非対応のWEBサイトも増えてきています。Windows標準搭載のウェブブラウザでありかつては圧倒的シェアがあったため現在でもわずかに利用者がいるようですが、Windows10ではIEではなくEdgeが標準ブラウザとして採用されているため無理にIEに対応させる必要もないでしょう。
 
 HTMLとjavascriptを知るには [MDN](https://developer.mozilla.org/ja/) が内容が充実していてかつ日本語にも訳されているためおすすめです。
 
@@ -98,15 +101,16 @@ nodejsを利用したウェブ開発ではnpmコマンドを使って開発に�
 
 このデモで使った外部パッケージは[こちら](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/package.json#L17-L37)の設定ファイルから確認できます。
 主な外部パッケージは以下のようになります。
-- [typescript](https://www.typescriptlang.org/): typescriptをjavascriptにコンパイルする。`tsc`コマンドでコンパイルができる。
-- [webpack](https://webpack.js.org/): 複数に分かれたファイルをひとまとめにして最適化してくれる。機能ごとにファイルを分けるモジュール化に必須。`webpack`コマンドでコードのバンドルができる。
-- [ts-loader](https://github.com/TypeStrong/ts-loader): webpackからtypescriptを呼び出すローダー。webpackの設定ファイルに[このように](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/webpack.config.js#L17-L20)ts-loaderの記述を書くだけでwebpackからtypescriptを自動で呼び出してくれる。つまり`webpack`コマンドだけで勝手にtypescriptコンパイラを呼び出すので`tsc`コマンドを使う必要がなくなる。
-- [tslint](https://palantir.github.io/tslint/): typescriptのコードチェックをしてくれる。連携できるコードエディタと組み合わせて使うと便利。
-- [prettier](https://prettier.io/): コード整形をしてくれる。コードエディタと連携するとファイルの保存時に勝手にprettierのルールに沿ったきれいなコードに整えてくれる。
-- [react](https://ja.reactjs.org/): [仮想DOM](https://ja.reactjs.org/docs/faq-internals.html) を用いて動的にHTMLの [DOM](https://developer.mozilla.org/ja/docs/Web/API/Document_Object_Model/Introduction) を操作してくれるライブラリ。似たような機能を有するライブラリでReactと共に人気のVue.jsというものがある。そちらのほうが簡単との噂を聞くが個人的な好みでReactを選択。5年くらい前までのReactが主流ではなかった時代は [jQuery](https://jquery.com/) というライブラリで直接 [DOM](https://developer.mozilla.org/ja/docs/Web/API/Document_Object_Model/Introduction) 操作をするのが主流だった。
+- [typescript](https://www.typescriptlang.org/): typescriptをjavascriptにコンパイルします。`tsc`コマンドでコンパイルができます。
+- [webpack](https://webpack.js.org/): モジュールバンドラ。複数に分かれたファイルをひとまとめにして最適化してくれます。機能ごとにファイルを分けるモジュール化に必要です。`webpack`コマンドでコードのバンドルができます。似たような機能のパッケージがいくつかありますが機能が豊富なためおそらく最も使われています。反面バンドル処理の時間が決して短くなくコード修正してブラウザで動作確認する作業の効率が悪いというデメリットがあります。処理時間が短いことが売りの`esbuild`というパッケージもあるそうですがまだ使ったことがないため今回はこちらを採用しました。
+- [ts-loader](https://github.com/TypeStrong/ts-loader): webpackからtypescriptを呼び出すローダーです。webpackの設定ファイルに[このように](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/webpack.config.js#L17-L20)ts-loaderの記述を書くだけでwebpackからtypescriptを自動で呼び出してくれます。つまり`webpack`コマンドからtypescriptコンパイラを呼び出すので`tsc`コマンドを使う必要がなくなります。
+- [tslint](https://palantir.github.io/tslint/): ~~typescriptのコードチェックをしてくれます。連携できるコードエディタと組み合わせて使うと便利です。~~
+最近非推奨になったため[eslint](https://eslint.org/)を使ったほうがいいようです。eslintは設定が多少複雑になるので今回はtslintのままにしておきます。
+- [prettier](https://prettier.io/): コード整形をしてくれます。コードエディタと連携するとファイルの保存時に勝手にprettierのルールに沿ったきれいなコードに整えてくれます。
+- [react](https://ja.reactjs.org/): [仮想DOM](https://ja.reactjs.org/docs/faq-internals.html) を用いて動的にHTMLの [DOM](https://developer.mozilla.org/ja/docs/Web/API/Document_Object_Model/Introduction) を操作してくれるライブラリ。似たような機能を有するライブラリでReactと共に人気のVue.jsというものがあります。日本ではVue.jsのほうが人気があり日本語の記事も多いようですが個人的な好みでReactを選択しました。5年くらい前までの仮想DOMが浸透していなかった時代は [jQuery](https://jquery.com/) というライブラリで直接 [DOM](https://developer.mozilla.org/ja/docs/Web/API/Document_Object_Model/Introduction) 操作をする実装が主流でした。
 - [@material-ui](https://material-ui.com/): googleが推奨するマテリアルデザインをReactで使えるようにするコンポーネント群。
 - [date-fns](https://date-fns.org/): 日付処理ライブラリ。
-- [@types](https://definitelytyped.org/): typescriptの型定義が見つからないjavascriptライブラリの型定義を補完する。
+- [@types](https://definitelytyped.org/): typescriptの型定義が見つからないjavascriptライブラリの型定義を補完します。
 - [@geolonia/japanese-numeral](https://blog.geolonia.com/2020/07/21/japanese-numeral.html): ちょうど数値を漢数字の文字列に変換するパッケージが公開されてたので使わせてもらいました。
 
 npmの設定ファイル [package.json](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/package.json) には記述していませんが、javascript版と同様に日本語に対応させた [pdfmake](http://pdfmake.org/#/) を使用しています。こちらはHTMLから直接[このように](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/index.html#L9-L10) javascript-minimal-webフォルダ内のpdfmake.min.jsとvfs_fonts.jsを参照することで読み込んでいます。
@@ -130,24 +134,24 @@ webpackとtypescriptを組み合わせて使うことにより機能ごとにフ
 その他のファイルやフォルダについては以下に簡単な説明を書いておきます。
 
 - [package.json](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/package.json):
-npmの設定ファイル。このファイルが有るフォルダに移動(`cd <フォルダのパス>`)して、`npm install`コマンドを実行するとpackage.jsonの["scripts" の部分](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/package.json#L6-L12)に`npm run`コマンドで実行できるコマンドを定義できる。例えば`npm install`コマンドで外部パッケージをインストールしている状態で`npm run build`コマンドを実行すると[ここに](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/package.json#L7)記述されているとおり`webpack -c webpack.config.prod.js`コマンドを呼び出して [dist](https://github.com/jishida/rikon-demo/tree/master/typescript-react-web/dist) フォルダに app.js を生成する。
-公式の[ここ](https://docs.npmjs.com/cli/v6/configuring-npm/package-json)から仕様を確認できる。
+npmの設定ファイル。このファイルが有るフォルダに移動(`cd <フォルダのパス>`)して、`npm install`コマンドを実行するとpackage.jsonの["scripts" の部分](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/package.json#L6-L12)に`npm run`コマンドで実行できるコマンドを定義できます。例えば`npm install`コマンドで外部パッケージをインストールしている状態で`npm run build`コマンドを実行すると[ここに](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/package.json#L7)記述されているとおり`webpack -c webpack.config.prod.js`コマンドを呼び出して [dist](https://github.com/jishida/rikon-demo/tree/master/typescript-react-web/dist) フォルダに app.js を生成します。
+公式の[ここ](https://docs.npmjs.com/cli/v6/configuring-npm/package-json)から仕様を確認できます。
 - [webpack.config.js](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/webpack.config.js):
-[webpack](https://webpack.js.org/) の設定をするスクリプト。このデモではこのファイルに開発用の設定を記述している。公式の[ここ](https://webpack.js.org/configuration/)から仕様を確認できる。
+[webpack](https://webpack.js.org/) の設定をするスクリプト。このデモではこのファイルに開発用の設定を記述しています。公式の[ここ](https://webpack.js.org/configuration/)から仕様を確認できます。
 - [webpack.config.prod.js](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/webpack.config.prod.js):
-[webpack](https://webpack.js.org/) の設定をするスクリプト。このデモではこのファイルに本番用の設定を記述している。公式の[ここ](https://webpack.js.org/configuration/)から仕様を確認できる。
+[webpack](https://webpack.js.org/) の設定をするスクリプト。このデモではこのファイルに本番用の設定を記述しています。公式の[ここ](https://webpack.js.org/configuration/)から仕様を確認できます。
 - [tsconfig.json](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/tsconfig.json):
-[typescript](https://www.typescriptlang.org/) の設定ファイル。公式の[ここ](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)や[ここのリファレンス](https://www.typescriptlang.org/tsconfig)から仕様を確認できる。
+[typescript](https://www.typescriptlang.org/) の設定ファイル。公式の[ここ](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)や[ここのリファレンス](https://www.typescriptlang.org/tsconfig)から仕様を確認できます。
 - [dist](https://github.com/jishida/rikon-demo/tree/master/typescript-react-web/dist) フォルダ:
 webpack から出力されたファイルを格納するフォルダ。[src](https://github.com/jishida/rikon-demo/tree/master/typescript-react-web/src) フォルダ以下のファイルをまとめたのち最適化して app.js というファイルを出力するように設定してあります。
 - [scripts](https://github.com/jishida/rikon-demo/tree/master/typescript-react-web/scripts) フォルダ:
-package.jsonの["scripts" の部分](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/package.json#L6-L12)から呼び出すスクリプトなんかを置くフォルダ。package.jsonの[この部分](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/package.json#L9)の記述により`npm run predev`コマンドで [scripts/predev.js](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/scripts/predev.js) を実行できる。
+package.jsonの["scripts" の部分](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/package.json#L6-L12)から呼び出すスクリプトなんかを置くフォルダ。package.jsonの[この部分](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/package.json#L9)の記述により`npm run predev`コマンドで [scripts/predev.js](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/scripts/predev.js) を実行できます。
 - [.gitignore](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/.gitignore): githubを使うのに必要なバージョン管理ソフトウェア [git](https://git-scm.com/) で無視するファイルを指定するファイル。
 - [.prettierignore](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/.prettierignore):
 [prettier](https://prettier.io/) で無視するファイルを指定するファイル。
 - [.prettierrc.yml](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/.prettierrc.yml):
 [prettier](https://prettier.io/) の設定を記述するファイル。
 [package-lock.json](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/package-lock.json):
-npm が生成するファイル`npm install`した際にインストールする外部パッケージのバージョンを固定する役割を持つ。
+npm が生成するファイル。`npm install`した際にインストールする外部パッケージのバージョンを固定する役割を持ちます。
 - [tslint.json](https://github.com/jishida/rikon-demo/blob/master/typescript-react-web/tslint.json):
 [tslint](https://palantir.github.io/tslint/) の設定ファイル。
